@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webpage</title>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial,sans-serif;
+        }
+        #nav{
+            background: rgba(25, 22, 39, 0.9);
+            display: flex;
+            height: 80px;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        #navbar{
+            display: flex;
+            height: 80px;
+            justify-content: space-between;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        #navtext{
+            display: flex;
+            text-decoration: none;
+            color: #FDF4DC;
+            align-items: center;
+            padding-left: 25px;
+        }
+        .navmenu{
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+        .navitems{
+            height: 80px;
+        }
+        .navlinks{
+            color: #FDF4DC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navlinks:hover{
+            color: #A799B7;
+            transition: all 0.5s ease;
+        }
+        @media screen and (max-width: 960px){
+            #navbar{
+                display: flex;
+                justify-content: space-between;
+                height: 80px;
+                width: 100%;
+                max-width: 1300px;
+                padding: 0;
+                z-index: 1;
+            }
+            .navmenu{
+                background: #533A71;
+                display: grid;
+                grid-template-columns: auto;
+                margin: 0;
+                width: 100%;
+                position: absolute;
+                top: -1000px;
+                opacity: 0;
+                transition: all 0.5s ease;
+                height: 50vh;
+                z-index: -1;
+            }
+            .navmenu.active{
+                background: #533A71;
+                top: 100%;
+                opacity: 1;
+                transition: 0.5s ease;
+                height: 50vh;
+                z-index: 99;
+                font-size: 1.6rem;
+            }
+            .navtoggle .bar{
+                width: 25px;
+                height: 3px;
+                margin: 5px auto;
+                transition: all 0.3s ease-in-out;
+                background: white;
+                display: block;
+                cursor: pointer;
+            }
+            .navitems{
+                width: 100%;
+            }
+            .navitems a{
+                color: #191627;
+            }
+            .navlinks{
+                text-align: center;
+                padding: 2rem;
+                width: 100%;
+                display: table;
+            }
+            #mobilemenu{
+                position: absolute;
+                top: 20%;
+                right: 5%;
+                transform: translate(5%, 20%);
+            }
+            #mobilemenu.is-active .bar:nth-child(2){
+                opacity: 0;
+            }
+            #mobilemenu.is-active .bar:nth-child(1){
+                transform: translateY(8px) rotate(45deg);
+            }
+            #mobilemenu.is-active .bar:nth-child(3){
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            #skill-lists{
+                overflow-y: scroll;
+            }
+        }
+        #about{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            /*background: url("images/hk.jpg")no-repeat;*/
+            /*background-size: cover;*/
+            /*height: 100vh;*/
+            padding-top: 6rem;
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+        #aboutme{
+            padding-top: 6rem;
+        }
+        #picture{
+            padding-top: 6rem;
+            display: flex;
+            justify-content: center;
+            img{
+                border-radius: 50%;
+                width: 300px;
+                height: 300px;
+                max-width: 100%;
+                object-fit: cover;
+            }
+        }
+        h1{
+            color: #191627;
+            text-decoration: underline;
+        }
+        p{
+            color: #FDF4DC;
+            font-size: 1rem;
+        }
+        /*#titlesmall{*/
+        /*    color: #191627;*/
+        /*}*/
+        h2{
+            color: #191627;
+            font-size: 1.2rem;
+        }
+        #experience{
+            padding-left: 20%;
+            padding-right: 20%;
+            padding-top: 6rem;
+            align-items: center;
+            text-align: center;
+        }
+        #exp1{
+            padding-top: 2rem;
+        }
+        #exp2{
+            padding-top: 2rem;
+        }
+        #exp3{
+            padding-top: 2rem;
+        }
+        #projects{
+            padding-top: 6rem;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        #project-lists{
+            display: block;
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 3rem;
+            align-items: flex-start;
+        }
+        /*#project-lists img{*/
+        /*    height: 12rem;*/
+        /*    object-fit: cover;*/
+        /*    border-radius: 0.25rem;*/
+        /*}*/
+        #project-fpga{
+            padding-top: 3rem;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        /*#project-apt{*/
+        /*    width: 50%;*/
+        /*    justify-self: center;*/
+        /*    padding-top: 3rem;*/
+        /*}*/
+        .project-pho img{
+            border-radius: 0.25rem;
+            width: 30%;
+            align-items: end;
+        }
+        .project-info{
+            width: 70%;
+        }
+        .project-date{
+            display: flex;
+            align-items: center;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .project-title{
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .project-desc{
+            display: flex;
+            margin-bottom: 1rem;
+            text-align: start;
+        }
+        #skills{
+            padding-top: 6rem;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            /*height: 100vh;*/
+        }
+        #programming{
+            width: 50%;
+            justify-self: center;
+            padding-top: 3rem;
+        }
+        #programming img{
+            width: 100px;
+            padding: 2%;
+            height: 100px;
+            transition: 0.5s;
+        }
+        #programming img:hover{
+            transform: scale(1.25);
+        }
+        #software{
+            width: 50%;
+            justify-self: center;
+            padding-top: 3rem;
+        }
+        #software img{
+            width: 100px;
+            padding: 2%;
+            height: 100px;
+            transition: 0.5s;
+        }
+        #software img:hover{
+            transform: scale(1.25);
+        }
+        #skill-lists{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            padding-bottom: 3rem;
+        }
+        #gradient{
+            background: linear-gradient(#2F284E,#EEBBD5);
+        }
+        footer{
+            background: #191627;
+            color: #FDF4DC;
+        }
+    </style>
+</head>
+<body>
+<div id="gradient">
+    <nav id="nav">
+        <div id="navbar">
+            <a href="index.html" id="navtext">Home</a>
+            <div class="navtoggle" id="mobilemenu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navmenu">
+                <li class="navitems">
+                    <a href="#about" class="navlinks">About</a>
+                </li>
+                <li class="navitems">
+                    <a href="#experience" class="navlinks">Experience</a>
+                </li>
+                <li class="navitems">
+                    <a href="#projects" class="navlinks">Projects</a>
+                </li>
+                <li class="navitems">
+                    <a href="#skills" class="navlinks">Skills</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="picture">
+        <img src="images/cw.png" alt="Calvin Wong"/>
+    </div>
+    <div id="about">
+        <h1>About Me</h1>
+        <h2>關於我</h2>
+        <div id="aboutme">
+            <p>Hi! I am Calvin Wong, currently enrolled in Level 4 of Bachelor of Technology specializing in Industrial Systems at McMaster University.</p>
+        </div>
+    </div>
+    <div id="experience">
+        <h1>Experience</h1>
+        <h2>經驗</h2>
+        <div id="exp1">
+            <p><b>Plan Group Inc.,</b> Vaughan ON - <i>Electrical Designer</i></p>JAN 2024 - AUG 2024
+            <p>Assisted the Virtual Design and Construction (VDC) team in designing and completing construction installation and fabrication layouts for Mechanical, Electrical and Technology (MET) projects.</p>
+        </div>
+        <div id="exp2">
+            <p><b>Tommy Hilfiger</b> Mississauga ON - <i>Retail Associate</i></p>DEC 2022 - FEB 2023
+            <p>Ensured high levels of customer satisfaction by providing professional customer service and maintaining storefront aesthetics. Provided support through inventory management and organization in a team environment.</p>
+        </div>
+        <div id="exp3">
+            <p><b>Mission Thrift Store,</b> Vaughan ON - <i>Electrical Designer</i></p>JUN 2022 - SEP 2022
+            <p>Highly independent in managing inventory through tasks such as processing customer donations, cleaning and organizing products to be ready for sale. Approached day-to-day tasks with a strong work ethic and supported a respectful and professional teamwork environment.</p>
+        </div>
+    </div>
+    <div id="projects">
+        <h1>Projects</h1>
+        <h2>項目</h2>
+        <div id="project-lists">
+            <div id="project-fpga">
+                <div class="project-pho">
+                    <img src="images/fpga.jpg" alt="fpga">
+                </div>
+                <div class="project-info">
+                    <div class="project-date">
+                        <p>NOV 2024 - DEC 2024</p>
+                    </div>
+                    <div class="project-title">
+                        <p>FPGA Elevator System</p>
+                    </div>
+                    <div class="project-desc">
+                        <p>Designed a 3-level elevator and a 7-segment display using FPGA and Verilog along with push buttons, LEDs, a reed-switch and a DC motor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="skills">
+        <h1>Skills</h1>
+        <h2>技術</h2>
+        <div id="skill-lists">
+            <div id="programming">
+                <p><b>Programming:</b></p>
+                <img src="images/c++.png" alt="c++">
+                <img src="images/python.png" alt="python">
+                <img src="images/css.png" alt="css">
+                <img src="images/html.png" alt="html">
+                <img src="images/matlab.png" alt="matlab">
+            </div>
+            <div id="software">
+                <p><b>Software:</b></p>
+                <img src="images/autocad.png" alt="autocad">
+                <img src="images/revit.png" alt="revit">
+                <img src="images/fusion.png" alt="fusion">
+                <img src="images/labview.png" alt="labview">
+                <img src="images/solidworks.png" alt="solidworks">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+<footer>
+    &copy; Calvin Wong
+</footer>
+</html>
